@@ -110,7 +110,7 @@ public class BattleSet_Servlet extends HttpServlet
 				/*************************** 2.開始查詢資料 *****************************************/
 				BattleSetService svc = new BattleSetService();
 
-				List<Map<String, NBATeamVO>> list = svc.getSetsByName(queryTeamName);
+				List<Map<String, Object>> list = svc.getSetsByName(queryTeamName);
 				if (list == null)
 				{
 					errorMsgs.add("※查無此隊伍");

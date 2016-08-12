@@ -25,7 +25,7 @@
 	pageContext.setAttribute("queryTeamName", queryTeamName);//將get到的 queryTeamName 放入 pageContext (pageScope)
 
 
-	List<Map<String, NBATeamVO>> list = null;
+	List<? extends Map<String, ?>> list = null;//////////////////////////////////////////////
 	if (queryTeamName == null)// 沒按過 依隊名查詢 → 就依日期查詢
 	{
 		BattleSetService battleSetSvc = new BattleSetService();
@@ -150,7 +150,7 @@
 			
 									<tr align='center' valign='middle'>
 										<td><h4 style="font-family:微軟正黑體;font-weight:bolder;">${battleSetVO['home'].teamName}</h4></td>
-										<td></td>
+										<td>${battleSetVO['battleTime']}</td>
 										<td><h4 style="font-family:微軟正黑體;font-weight:bolder;">${battleSetVO['away'].teamName}</h4></td>
 									</tr>
 								</c:forEach>

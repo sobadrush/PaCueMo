@@ -71,9 +71,9 @@ public class BattleSetService
 		return retern_list;
 	}
 
-	public List<Map<String, NBATeamVO>> getSetsByName(String teamName)
+	public List<Map<String, Object>> getSetsByName(String teamName)
 	{
-		List<Map<String, NBATeamVO>> retern_list = new ArrayList<>();
+		List<Map<String, Object>> retern_list = new ArrayList<>();
 		//------------【根據輸入的teamName找到對應的teamID】------------------------
 		NBATeamService nbaSvc = new NBATeamService();
 
@@ -106,13 +106,16 @@ public class BattleSetService
 		List<BattleSetVO> list_battleSet = dao.getSetsById(teamId);
 		for (BattleSetVO vo : list_battleSet)
 		{
+
 			//----由此場次的 homeId、awayID 找到teamVO
 			NBATeamVO homeVO = nbaSvc.getByTeamId(vo.getHomeId());
 			NBATeamVO awayVO = nbaSvc.getByTeamId(vo.getAwayId());
 
-			Map<String, NBATeamVO> myMap = new HashMap<>();
+			Map<String, Object> myMap = new HashMap<>();// 加入battleTime ， 將 Map<String, NBATeamVO> 改為 Map<String, Object>
 			myMap.put("home", homeVO);
 			myMap.put("away", awayVO);
+			myMap.put("battleTime", vo.getBattleDateTime().toString().substring(0, 16));
+
 			retern_list.add(myMap);
 		}
 		return retern_list;
@@ -141,6 +144,16 @@ public class BattleSetService
 
 	public static void main(String[] args)
 	{
+		//-------------依隊名查詢(加入 對戰時間)--------------
+//		BattleSetService svc = new BattleSetService();
+//		List<Map<String, Object>> list = svc.getSetsByName("小牛");
+//		for (Map<String, Object> map : list)
+//		{
+//			String homeName = ((NBATeamVO) map.get("home")).getTeamName();
+//			String awayName = ((NBATeamVO) map.get("away")).getTeamName();
+//			String battletime = ((String) map.get("battleTime"));
+//			System.out.println(homeName + "  vs  " + awayName + "  -----  time :  " + battletime);
+//		}
 		//-------------依日期查詢--------------
 //		BattleSetService svc = new BattleSetService();
 //		List<Map<String, NBATeamVO>> ans = svc.getSetsByDate("2015-11-06");
