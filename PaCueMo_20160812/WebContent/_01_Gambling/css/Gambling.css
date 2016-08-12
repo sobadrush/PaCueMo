@@ -1,0 +1,77 @@
+
+ 
+ .table_1{
+ 				border-collapse: collapse;
+			    border-spacing: 0;
+			    text-align:center;
+/* 	  	  		border: 1px solid blue; */
+	  	  }
+		  	  .table_1 tr{
+		  	  	  height:100px;
+		  	  }
+		  	  .table_1 tr:HOVER{
+		  	  	  background-color: #ffff99;
+		  	  	  height:100px;
+		  	  }
+	  	  	  .table_1 td{
+/* 	  	  	  	  border: 1px solid black; */
+				  text-align:center;
+		  	  	  width:100px;
+		  	  }
+		 fieldset {
+					border:1px solid #999;
+					border-radius:8px;
+					box-shadow:0 0 10px #999;
+					width:500px;
+		 }
+		 legend {
+					background:#fff;
+		 }
+	  	  .imgVS{
+	  	  	height:50px;
+	  	  	width:50px;
+	  	  }
+	  	  .imgTeam{
+	  	  	height:100px;
+	  	  	width:100px;
+	  	  }
+	  	  
+	  	  
+/*  =======================�j�MtextBox=============================  */	  
+  #nbalogo{
+	  	width:150px;
+	  	height:80px;
+	  }
+	#search {
+		width: 165px;
+		height: 26px;
+		padding: 5px 0 0 10px;
+		background: url(http://lh6.ggpht.com/_HjB26hkIEK8/S4eG6ApmvxI/AAAAAAAAKJQ/YNzhv4md5Es/Search%20011.gif) no-repeat;
+	}
+	#s {
+		width: 123px;
+		height: 18px;
+		padding: 3px 0px 0px 4px;
+		float: left;
+		border: none;
+		background: url(http://lh6.ggpht.com/_HjB26hkIEK8/S4eG6BuSbQI/AAAAAAAAKJU/x6J_wqP9I1s/Search%20011-1.png) no-repeat;
+		color: #000000;
+		font-family: Arial;
+	}
+	#r {
+		width: 21px;
+		height: 21px;
+		margin-left: 5px;
+		float: left;
+		cursor: pointer;
+		border: none;
+		background: url(http://lh6.ggpht.com/_HjB26hkIEK8/S4eG6fi9JGI/AAAAAAAAKJY/Mk63nomQ7RU/Search%20011-2.png) no-repeat;
+	}
+	#r:hover {
+		background: url(http://lh6.ggpht.com/_HjB26hkIEK8/S4eG6fi9JGI/AAAAAAAAKJY/Mk63nomQ7RU/Search%20011-2.png) no-repeat bottom;
+	}
+
+
+/* ======================================================= */
+
+  	  

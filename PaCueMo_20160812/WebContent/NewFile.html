@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script></script>
+<body>
+	<table id='tb1' border="1" style="width:200px;height:300px;">
+		
+	</table>
+	
+	
+	<h1>Hello</h1>
+</body>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<!-- GOOGLE jQuery CDN -->
+<script>
+	$(function()
+	{
+		   var cs1 = { 'color':'red' }
+		   $('h1').css(cs1)
+		
+		   $(document).on("click",function() {
+		    
+			   var myTr  =  $('<tr></tr>');
+// 			   $('<td></td>').html('<h2>Hello</h2>').appendTo(myTr);
+			   $('<td></td>').html('<h2>fuck</h2>').css('color','orange').appendTo(myTr);
+			   
+			   $(myTr).appendTo($('#tb1'));
+		    });
+		
+
+	})
+</script>
+
+</html>
+
+
+

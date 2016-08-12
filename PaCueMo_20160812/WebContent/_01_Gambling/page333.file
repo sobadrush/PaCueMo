@@ -1,0 +1,62 @@
+﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<table border="0">    
+ <tr>
+  <%if (rowsPerPage<rowNumber) {%>
+    <%if(pageIndex>=rowsPerPage){%>
+    
+    	<%if( pageContext.getAttribute("queryTeamName") != null ){%>
+    		<td><A href="<%=request.getRequestURI()%>?whichPage=1&queryTeamName=${queryTeamName}">至第一頁</A>&nbsp;</td>
+	        <td><A href="<%=request.getRequestURI()%>?whichPage=<%=whichPage-1%>&queryTeamName=${queryTeamName}">上一頁 </A>&nbsp;</td>
+    	<%}else{%>
+    		<td><A href="<%=request.getRequestURI()%>?whichPage=1&queryDate=${queryDate}">至第一頁</A>&nbsp;</td>
+	        <td><A href="<%=request.getRequestURI()%>?whichPage=<%=whichPage-1%>&queryDate=${queryDate}">上一頁 </A>&nbsp;</td>
+    	<%}%>
+	        
+    <%}%>
+    
+  
+    <%if(pageIndex<pageIndexArray[pageNumber-1]){%>
+    
+    	<%if( pageContext.getAttribute("queryTeamName") != null ){%>                               
+			<td><A href="<%=request.getRequestURI()%>?whichPage=<%=whichPage+1%>&queryTeamName=${queryTeamName}">下一頁 </A>&nbsp;</td>
+	        <td><A href="<%=request.getRequestURI()%>?whichPage=<%=pageNumber%>&queryTeamName=${queryTeamName}">至最後一頁</A>&nbsp;</td>
+    	<%}else{%>
+	        <td><A href="<%=request.getRequestURI()%>?whichPage=<%=whichPage+1%>&queryDate=${queryDate}">下一頁 </A>&nbsp;</td>
+	        <td><A href="<%=request.getRequestURI()%>?whichPage=<%=pageNumber%>&queryDate=${queryDate}">至最後一頁</A>&nbsp;</td>
+    	<%}%>
+    	
+    <%}%>
+  <%}%>  
+ </tr>
+</table>    
+<%if ( pageNumber > 1) {%>
+
+<%=pageContext.getAttribute("queryDate")%>
+queryTeamName : <%=pageContext.getAttribute("queryTeamName")%>
+
+<table border="0">   
+ <tr> 
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+   <FORM METHOD="POST" ACTION="<%=request.getRequestURI()%>"> 
+            
+        <td>
+           <select size="1" name="whichPage">
+        <%for (int i=1; i<=pageNumber; i++){%>
+           <option value="<%=i%>">跳至第<%=i%>頁
+        <%}%> 
+           </select>
+           <input type="submit" value="確定" >  
+        </td>
+        <%if( pageContext.getAttribute("queryTeamName") != null ){%>
+	        <input type"hidden" name="queryTeamName" value="<%=pageContext.getAttribute("queryTeamName")%>" style="display:none"> 
+	    <%}else{%>    
+	        <input type"hidden" name="queryDate" value="<%=pageContext.getAttribute("queryDate")%>" style="display:none"> 
+        <%}%>
+   </FORM>
+ </tr>
+</table>
+<%}%>
+
+
