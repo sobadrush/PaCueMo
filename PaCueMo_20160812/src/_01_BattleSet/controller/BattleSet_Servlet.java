@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import _01_BattleSetDAO.model.BattleSetService;
-import _01_NBATeam.model.NBATeamVO;
 
 @WebServlet("/_01_Gambling/BattleSet_Servlet.do")
 public class BattleSet_Servlet extends HttpServlet
@@ -62,7 +61,7 @@ public class BattleSet_Servlet extends HttpServlet
 				}
 				/*************************** 2.開始查詢資料 ( jQuery + Ajax : return JSON ) **********/
 				BattleSetService svc = new BattleSetService();
-				List<Map<String, NBATeamVO>> list = svc.getSetsByDate(queryDate);
+				List<Map<String, Object>> list = svc.getSetsByDate(queryDate);// modify:2016/08/12 增加對戰時間
 				Gson gson = new Gson();
 
 				String ans = gson.toJson(list);

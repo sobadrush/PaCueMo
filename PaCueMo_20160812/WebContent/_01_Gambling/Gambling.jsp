@@ -150,7 +150,7 @@
 			
 									<tr align='center' valign='middle'>
 										<td><h4 style="font-family:微軟正黑體;font-weight:bolder;">${battleSetVO['home'].teamName}</h4></td>
-										<td><Strong>${battleSetVO['battleTime']}</Strong></td>
+										<td><Strong class='glyphicon glyphicon-time' style="padding-right:5px;">${battleSetVO['battleTime']}</Strong></td>
 										<td><h4 style="font-family:微軟正黑體;font-weight:bolder;">${battleSetVO['away'].teamName}</h4></td>
 									</tr>
 								</c:forEach>
@@ -242,8 +242,11 @@
 							    		   var myTr2  = $('<tr></tr>').attr( attr_Tr );
 							    		   
 							    		   $('<td></td>').html("<h4 style='font-family:微軟正黑體;font-weight:bolder;'>" +
-							    		   						 obj.home.teamName + '</h4>').appendTo(myTr2);   						
-							    		   $('<td></td>').appendTo(myTr2);
+							    		   						 obj.home.teamName + '</h4>').appendTo(myTr2); 
+							    		   
+							    		   $('<td></td>').html("<Strong class='glyphicon glyphicon-time'>" +
+							    		   						 obj.battleTime + '</Strong>').appendTo(myTr2);
+							    		   
 							    		   $('<td></td>').html("<h4 style='font-family:微軟正黑體;font-weight:bolder;'>" + 
 							    		   						 obj.away.teamName + '</h4>').appendTo(myTr2);
 							    		 

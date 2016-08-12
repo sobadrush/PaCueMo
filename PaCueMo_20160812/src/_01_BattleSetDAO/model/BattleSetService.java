@@ -43,10 +43,10 @@ public class BattleSetService
 		return list;
 	}
 
-	public List<Map<String, Object>> getLogoURLs(String queryDate)// ----- Map<String, NBATeamVO> 改為 Map<String, Object>
+	public List<Map<String, Object>> getLogoURLs(String queryDate)// -----modify:2016/08/12：增加對戰時間 Map<String, NBATeamVO> 改為 Map<String, Object>
 	{
 		List<BattleSetVO> list_BattleSet = dao.getAll();
-		List<Map<String, Object>> retern_list = new ArrayList<>();// ----- Map<String, NBATeamVO> 改為 Map<String, Object>
+		List<Map<String, Object>> retern_list = new ArrayList<>();// -----modify:2016/08/12：增加對戰時間 Map<String, NBATeamVO> 改為 Map<String, Object>
 
 		NBATeamService nbaSvc = new NBATeamService();
 		for (BattleSetVO vo : list_BattleSet)
@@ -62,7 +62,7 @@ public class BattleSetService
 				int awayId = vo.getAwayId();
 				NBATeamVO awayVO = nbaSvc.getByTeamId(awayId);
 
-				Map<String, Object> myMap = new HashMap<>();// ----- Map<String, NBATeamVO> 改為 Map<String, Object>
+				Map<String, Object> myMap = new HashMap<>();// -----modify:2016/08/12：增加對戰時間 Map<String, NBATeamVO> 改為 Map<String, Object>
 				myMap.put("home", homeVO);
 				myMap.put("away", awayVO);
 				myMap.put("battleTime", battleTime);
@@ -74,9 +74,9 @@ public class BattleSetService
 		return retern_list;
 	}
 
-	public List<Map<String, Object>> getSetsByName(String teamName)
+	public List<Map<String, Object>> getSetsByName(String teamName)// modify:2016/08/12：增加對戰時間
 	{
-		List<Map<String, Object>> retern_list = new ArrayList<>();
+		List<Map<String, Object>> retern_list = new ArrayList<>();// modify:2016/08/12：增加對戰時間
 		//------------【根據輸入的teamName找到對應的teamID】------------------------
 		NBATeamService nbaSvc = new NBATeamService();
 
@@ -114,7 +114,7 @@ public class BattleSetService
 			NBATeamVO homeVO = nbaSvc.getByTeamId(vo.getHomeId());
 			NBATeamVO awayVO = nbaSvc.getByTeamId(vo.getAwayId());
 
-			Map<String, Object> myMap = new HashMap<>();// 加入battleTime ， 將 Map<String, NBATeamVO> 改為 Map<String, Object>
+			Map<String, Object> myMap = new HashMap<>();// modify:2016/08/12：增加對戰時間 ， 將 Map<String, NBATeamVO> 改為 Map<String, Object>
 			myMap.put("home", homeVO);
 			myMap.put("away", awayVO);
 			myMap.put("battleTime", vo.getBattleDateTime().toString().substring(0, 16));
@@ -124,21 +124,25 @@ public class BattleSetService
 		return retern_list;
 	}
 
-	public List<Map<String, NBATeamVO>> getSetsByDate(String queryDate)
+	public List<Map<String, Object>> getSetsByDate(String queryDate)// modify:2016/08/12 增加對戰時間
 	{
-		List<Map<String, NBATeamVO>> return_list = new ArrayList<Map<String, NBATeamVO>>();
+		List<Map<String, Object>> return_list = new ArrayList<>();// modify:2016/08/12 增加對戰時間
 		List<BattleSetVO> list = dao.getSetsByDate(queryDate);
 		NBATeamService nbaSvc = new NBATeamService();
 		for (BattleSetVO vo : list)
 		{
 //			System.out.println(vo.getHomeId() + " vs " + vo.getAwayId());
+//			System.out.println(vo.getBattleDateTime().toString().substring(11, 16));
 
+			String battleTime = vo.getBattleDateTime().toString().substring(11, 16);// modify:2016/08/12 增加對戰時間
 			NBATeamVO home = nbaSvc.getByTeamId(vo.getHomeId());
 			NBATeamVO away = nbaSvc.getByTeamId(vo.getAwayId());
 
-			Map<String, NBATeamVO> myMap = new HashMap<>();
+			Map<String, Object> myMap = new HashMap<>();// modify:2016/08/12 增加對戰時間
 			myMap.put("home", home);
 			myMap.put("away", away);
+			myMap.put("battleTime", battleTime);
+
 			return_list.add(myMap);
 		}
 
@@ -147,8 +151,15 @@ public class BattleSetService
 
 	public static void main(String[] args)
 	{
-		BattleSetService svc = new BattleSetService();
-		svc.getLogoURLs("2016-08-12");
+//		BattleSetService svc = new BattleSetService();
+//		List<Map<String, Object>> list = svc.getSetsByDate("2016-07-14");
+//		for (Map<String, Object> map : list)
+//		{
+//			System.out.println(((String) map.get("battleTime")));
+//		}
+
+//		BattleSetService svc = new BattleSetService();
+//		svc.getLogoURLs("2016-08-12");
 
 		//-------------依隊名查詢(加入 對戰時間)--------------
 //		BattleSetService svc = new BattleSetService();
