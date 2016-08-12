@@ -43,14 +43,16 @@ public class BattleSetService
 		return list;
 	}
 
-	public List<Map<String, NBATeamVO>> getLogoURLs(String queryDate)
+	public List<Map<String, Object>> getLogoURLs(String queryDate)// ----- Map<String, NBATeamVO> 改為 Map<String, Object>
 	{
 		List<BattleSetVO> list_BattleSet = dao.getAll();
-		List<Map<String, NBATeamVO>> retern_list = new ArrayList<>();
+		List<Map<String, Object>> retern_list = new ArrayList<>();// ----- Map<String, NBATeamVO> 改為 Map<String, Object>
+
 		NBATeamService nbaSvc = new NBATeamService();
 		for (BattleSetVO vo : list_BattleSet)
 		{
 			String battleDate = vo.getBattleDateTime().toString().substring(0, 10);
+			String battleTime = vo.getBattleDateTime().toString().substring(10, 16);
 
 			if (queryDate.equals(battleDate))
 			{
@@ -60,9 +62,10 @@ public class BattleSetService
 				int awayId = vo.getAwayId();
 				NBATeamVO awayVO = nbaSvc.getByTeamId(awayId);
 
-				Map<String, NBATeamVO> myMap = new HashMap<>();
+				Map<String, Object> myMap = new HashMap<>();// ----- Map<String, NBATeamVO> 改為 Map<String, Object>
 				myMap.put("home", homeVO);
 				myMap.put("away", awayVO);
+				myMap.put("battleTime", battleTime);
 
 				retern_list.add(myMap);
 			}
@@ -144,6 +147,9 @@ public class BattleSetService
 
 	public static void main(String[] args)
 	{
+		BattleSetService svc = new BattleSetService();
+		svc.getLogoURLs("2016-08-12");
+
 		//-------------依隊名查詢(加入 對戰時間)--------------
 //		BattleSetService svc = new BattleSetService();
 //		List<Map<String, Object>> list = svc.getSetsByName("小牛");

@@ -150,7 +150,7 @@
 			
 									<tr align='center' valign='middle'>
 										<td><h4 style="font-family:微軟正黑體;font-weight:bolder;">${battleSetVO['home'].teamName}</h4></td>
-										<td>${battleSetVO['battleTime']}</td>
+										<td><Strong>${battleSetVO['battleTime']}</Strong></td>
 										<td><h4 style="font-family:微軟正黑體;font-weight:bolder;">${battleSetVO['away'].teamName}</h4></td>
 									</tr>
 								</c:forEach>
