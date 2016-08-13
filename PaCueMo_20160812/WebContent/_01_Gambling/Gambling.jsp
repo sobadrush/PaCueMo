@@ -59,6 +59,9 @@
 <script src="js/high_class_alert/jquery.alertable.min.js"></script>
 <script src='js/high_class_alert/velocity.min.js'></script>
 <script src='js/high_class_alert/velocity.ui.min.js'></script>
+<!-- ****************** 【credit card】******************** -->
+<script src="js/credit_Card/jquery.card.js"></script>
+
 <!-- ****************** 【BootStrap】******************** -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -120,8 +123,7 @@
 					  <li role="presentation">
 						  	<img width="30" alt="您的代幣" src="<%=request.getContextPath()%>/image/money.jpg"> <input type="text" readonly="readonly" style="width: 100px; text-align: right;">
 					  </li>
-					  <li id="dateQuery" role="presentation" style="margin-top:20px;">
-					 	 日期查詢
+					  <li id="dateQuery" role="presentation" style="margin-top:20px;"><!-- 日期查詢 -->
 					  	 <div id="datepicker-2"  style="margin-left:10px;"></div>
 					  </li>
 				</ul>
@@ -171,14 +173,86 @@
 
 	</div>
 
+		<!-- ====================================================================== -->
+		<!-- ========================【 購買點數 - 信用卡 】======================= -->
+		<!-- ====================================================================== -->
+		<div id="dialog-form" title="購買點數">
+	            <div class="card-wrapper"></div>
+	            <form id="credit_card" action="">
+	                <!-- <fieldset style="padding: 0;border: 0;margin-top: 25px;"> -->
+	                
+	                  <div class="form-group">
+						  <label class="control-label" for="number" style="font-family:'微軟正黑體';font-weight:bolder;">卡 號</label>
+						  <input placeholder="Card number" type="text" name="number" class="form-control">
+					  </div>
+	                  <div class="form-group">
+						  <label class="control-label" for="name" style="font-family:'微軟正黑體';font-weight:bolder;">姓 名</label>
+						  <input placeholder="Full name" type="text" name="name" class="form-control">
+					  </div>
+	                  <div class="form-group">
+						  <label class="control-label" for="expiry" style="font-family:'微軟正黑體';font-weight:bolder;">期 限</label>
+						  <input placeholder="MM/YY" type="text" name="expiry" class="form-control">
+					  </div>
+					  <div class="form-group">
+						  <label class="control-label" for="cvc" style="font-family:'微軟正黑體';font-weight:bolder;">代 碼</label>
+						  <input placeholder="CVC" type="text" name="cvc" class="form-control">
+					  </div>
 
+	                  <!-- Allow form submission with keyboard without duplicating the dialog button -->
+	                  <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+	               <!--  </fieldset> -->
+	            </form>
+	    </div>
 <!-- ================================================================================= -->
 
 
 	<script type="text/javascript">
 
 		$(function()//ready事件
-		{			
+		{	     
+			
+			$('#ff1').next().on("click", function () {
+           	 myDialog.dialog("open");
+        	});
+			
+			//===================【 購買點數 - 信用卡 】======================		
+			
+			var myDialog, form;
+
+            myDialog = $("#dialog-form").dialog({
+                autoOpen: false,
+                height: 650,
+                width: 500,
+                modal: true,
+                buttons: {
+                    "確認購買": function () {
+                        alert('hi');
+                    },
+                    "取消": function () {
+                        myDialog.dialog("close");
+                    }
+                },
+                close: function () {
+                    form[0].reset();
+                }
+            });
+
+            form = myDialog.find("form").on("submit", function (event) {
+                event.preventDefault();
+                alert('Hello');
+            });
+
+      
+
+
+            //---------------------------------
+            $('#dialog-form').card({
+                // a selector or DOM element for the container
+                // where you want the card to appear
+                container: '.card-wrapper', // *required*
+                // all of the other options from above
+            });
+			
 			//=================== 左方選單 choosed ======================
 			$('ul.nav-stacked > li' ).click(function () /*ul 下的 li*/
 			{
