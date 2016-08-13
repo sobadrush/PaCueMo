@@ -197,7 +197,10 @@
 						  <label class="control-label" for="cvc" style="font-family:'微軟正黑體';font-weight:bolder;">代 碼</label>
 						  <input placeholder="CVC" type="text" name="cvc" class="form-control">
 					  </div>
-
+					 <div class="form-group">
+						  <label class="control-label" for="coin" style="font-family:'微軟正黑體';font-weight:bolder;">購買金額(1 NT: 100 P)</label>
+						  <input placeholder="購買代幣金額(not NT)" type="text" name="coin" class="form-control">
+					  </div>
 	                  <!-- Allow form submission with keyboard without duplicating the dialog button -->
 	                  <!-- <input type="submit" tabindex="-1" style="position:absolute; top:-1000px"> -->
 	               <!--  </fieldset> -->
@@ -221,7 +224,7 @@
 
             myDialog = $("#dialog-form").dialog({
                 autoOpen: false,
-                height: 650,
+                height: 700,
                 width: 500,
                 modal: true,
                 buttons:[
@@ -235,6 +238,7 @@
 	                        	 			console.log($("input[placeholder='Full name']").val());
 	                        	 			console.log($("input[placeholder='MM/YY']").val());
 	                        	 			console.log($("input[placeholder='CVC']").val());
+	                        	 			console.log($("input[placeholder='購買代幣金額(not NT)']").val());
 	                        	 			
 	                        	 			
 	                                    myDialog.dialog("close");/*關閉 dialog*/
