@@ -106,7 +106,7 @@
 		    	<img align="middle" class="img-rounded" id="nbalogo" alt="nbalogo" src="<%=request.getContextPath()%>/image/NBA_logo.jpg">
 
 			    <ul class="nav nav-pills nav-stacked">
-					  <li id="ff1" role="presentation" class="active"><a href="#"><span class="glyphicon glyphicon-chevron-right">  運彩玩法</span></a></li>
+					  <li id="ff1" role="presentation"><a href="#"><span class="glyphicon glyphicon-chevron-right">  運彩玩法</span></a></li>
 					  <li role="presentation"><a href="#"><span class="glyphicon glyphicon-chevron-right">  購買代幣</span></a></li>
 					  <li role="presentation"><a href="#"><span class="glyphicon glyphicon-chevron-right">  熱門賽事</span></a></li>
 					  <li role="presentation"><a href="#"><span class="glyphicon glyphicon-chevron-right">  下注紀錄</span></a></li>
@@ -179,23 +179,20 @@
 
 		$(function()//ready事件
 		{			
-			//================== Hover ,  on 綁定到上層(處理動態新增元素) =====================
+			//=================== 左方選單 choosed ======================
+			$('ul.nav-stacked > li' ).click(function () /*ul 下的 li*/
+			{
+				$('li.active').removeClass();/*li的class叫 active的所有元素*/
+				$(this).addClass('active');
+			})
+			
+			//================== 對戰組合 Hover ,  on 綁定到上層(處理動態新增元素) =====================
 			$('#myJumbo').on('mouseover','tr:nth-child(2n+1)', function(){
 				$(this).css('background','rgba(224,224,224,1)'); 
 			}).on('mouseout','tr:nth-child(2n+1)',function(){
 				$(this).css('background','rgba(224,224,224,0.1)'); 
 			})
 			
-// 		 	$('.table~div:first').click(function(){ // 若要選同層的第二個 $('.table~div:first').next() → 加next
-// 			   		alert("ABC");
-// 			})
-
-// 			$('#myJumbo').on('click','>div',function()  // 將事件綁到上層
-// 			{
-// 				alert('123')
-// 			})
-			
-
 			/* 月曆-2  */
 			$(function() {
 		
