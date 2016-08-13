@@ -174,7 +174,7 @@
 	</div>
 
 		<!-- ====================================================================== -->
-		<!-- ========================【 購買點數 - 信用卡 】======================= -->
+		<!-- ====================【 購買點數 - 信用卡 dialog 】==================== -->
 		<!-- ====================================================================== -->
 		<div id="dialog-form" title="購買點數">
 	            <div class="card-wrapper"></div>
@@ -199,7 +199,7 @@
 					  </div>
 
 	                  <!-- Allow form submission with keyboard without duplicating the dialog button -->
-	                  <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+	                  <!-- <input type="submit" tabindex="-1" style="position:absolute; top:-1000px"> -->
 	               <!--  </fieldset> -->
 	            </form>
 	    </div>
@@ -210,28 +210,47 @@
 
 		$(function()//ready事件
 		{	     
+
 			
-			$('#ff1').next().on("click", function () {
+			$('#ff1').next().on("click", function () { /* 購買代幣 <li> */
            	 myDialog.dialog("open");
         	});
-			
 			//===================【 購買點數 - 信用卡 】======================		
 			
-			var myDialog, form;
+			 var myDialog, form;
 
             myDialog = $("#dialog-form").dialog({
                 autoOpen: false,
                 height: 650,
                 width: 500,
                 modal: true,
-                buttons: {
-                    "確認購買": function () {
-                        alert('hi');
-                    },
-                    "取消": function () {
-                        myDialog.dialog("close");
-                    }
-                },
+                buttons:[
+	                         {
+	                        	 	 text  : "確認購買",
+	                        	 	'class' : "btn btn-primary",
+	                        	 	 click : function (){
+	                        	 			
+	                        	 		   //alert($(this).prop('tagName') +" 確認" );
+	                        	 			console.log($("input[placeholder='Card number']").val());
+	                        	 			console.log($("input[placeholder='Full name']").val());
+	                        	 			console.log($("input[placeholder='MM/YY']").val());
+	                        	 			console.log($("input[placeholder='CVC']").val());
+	                        	 			
+	                        	 			
+	                                    myDialog.dialog("close");/*關閉 dialog*/
+									 }
+	                         }  ,
+	                         {
+	                        	 	 text  : "取消",
+	                        	 	'class' : "btn btn-primary",
+	                        	 	 click : function (){
+	                        	 			alert($(this).prop('tagName')+"cancel");
+	                                     myDialog.dialog("close");/*關閉 dialog*/
+									 }
+                         		}
+                         
+               ] ,
+
                 close: function () {
                     form[0].reset();
                 }
@@ -242,10 +261,8 @@
                 alert('Hello');
             });
 
-      
-
-
-            //---------------------------------
+ 
+            //------------ 信用卡 --------------
             $('#dialog-form').card({
                 // a selector or DOM element for the container
                 // where you want the card to appear
