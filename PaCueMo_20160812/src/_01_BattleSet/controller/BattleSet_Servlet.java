@@ -82,6 +82,7 @@ public class BattleSet_Servlet extends HttpServlet
 			}
 			catch (Exception e)//---處理其他不可預期意外
 			{
+				System.out.println(" ========== BattleSet_Servlet.java 不可預期意外 ========== ");
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = request.getRequestDispatcher("xxxxxxxxxx");
 				failureView.forward(request, response);

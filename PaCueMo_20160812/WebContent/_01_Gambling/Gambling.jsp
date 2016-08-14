@@ -61,7 +61,8 @@
 <script src='js/high_class_alert/velocity.ui.min.js'></script>
 <!-- ****************** 【credit card】******************** -->
 <script src="js/credit_Card/jquery.card.js"></script>
-
+<!-- ****************** 【notiny】******************** -->
+<link href="css/notiny.min.css" rel="stylesheet">
 <!-- ****************** 【BootStrap】******************** -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -183,27 +184,27 @@
 	                
 	                  <div class="form-group">
 						  <label class="control-label" for="number" style="font-family:'微軟正黑體';font-weight:bolder;">卡 號</label>
-						  <input placeholder="Card number" type="text" name="number" class="form-control">
+						  <input placeholder="Card number" type="text" name="number" class="form-control" value="4023 7845 6941 3354">
 					  </div>
 	                  <div class="form-group">
 						  <label class="control-label" for="name" style="font-family:'微軟正黑體';font-weight:bolder;">姓 名</label>
-						  <input placeholder="Full name" type="text" name="name" class="form-control">
+						  <input placeholder="Full name" type="text" name="name" class="form-control" value="科比布萊恩">
 					  </div>
 	                  <div class="form-group">
 						  <label class="control-label" for="expiry" style="font-family:'微軟正黑體';font-weight:bolder;">期 限</label>
-						  <input placeholder="MM/YY" type="text" name="expiry" class="form-control">
+						  <input placeholder="MM/YY" type="text" name="expiry" class="form-control" value="07/2018">
 					  </div>
 					  <div class="form-group">
 						  <label class="control-label" for="cvc" style="font-family:'微軟正黑體';font-weight:bolder;">代 碼</label>
-						  <input placeholder="CVC" type="text" name="cvc" class="form-control">
+						  <input placeholder="CVC" type="text" name="cvc" class="form-control" value="346">
 					  </div>
 					 <div class="form-group col-xs-6">
 						  <label class="control-label" for="NTD" style="font-family:'微軟正黑體';font-weight:bolder;">購買金額 (1 NT$ : 100 P)</label>
-						  <input placeholder="購買金額(NT)" type="text" name="NTD" class="form-control">
+						  <input placeholder="購買金額(NT)" type="text" name="NTD" class="form-control" value="990">
 					  </div>
 					   <div class="form-group col-xs-6">
 						  <label class="control-label" for="coin" style="font-family:'微軟正黑體';font-weight:bolder;">代幣數量</label>
-						  <input placeholder="代幣數量" type="text" name="coin" class="form-control" readonly="readonly">
+						  <input placeholder="代幣數量" type="text" name="coin" class="form-control" readonly="readonly" value="99000">
 					  </div>
 	                  <!-- Allow form submission with keyboard without duplicating the dialog button -->
 	                  <!-- <input type="submit" tabindex="-1" style="position:absolute; top:-1000px"> -->
@@ -211,7 +212,8 @@
 	            </form>
 	    </div>
 <!-- ================================================================================= -->
-
+	<script src="js/notiny/notiny.min.js"></script>
+	<script src="js/jquery-ui.effects.min.js"></script>
 	<script src="js/js_Util.js"></script>
 	<script type="text/javascript">
 
@@ -223,7 +225,7 @@
         	});
 			//===================【 購買點數 - 信用卡 】======================		
 			
-			/* keyin 台幣 => 轉代幣  */
+			/* key-in 台幣 => 轉代幣  */
 			$("input[placeholder='購買金額(NT)']").keyup(function(){ 
 					$("input[placeholder='代幣數量']").val($(this).val() * 100 /* 代幣比值 */);
 			})
@@ -232,6 +234,8 @@
 
             myDialog = $("#dialog-form").dialog({
                 autoOpen: false,
+                show : { effect :'fold', duration: 1000 },
+                hide : { effect :'blind', duration: 500 },
                 height: 700,
                 width: 500,
                 modal: true,
@@ -248,7 +252,6 @@
 	                        	 		    var cvc      = $("input[placeholder='CVC']").val();
 	                        	 		    var ntd      = $("input[placeholder='購買金額(NT)']").val();
 	                        	 		    var coin     = $("input[placeholder='代幣數量']").val();
-
 	                        	 			//======================================================
 	                        	 			//==============【傳送信用卡資訊到servlet】=============
 	                        	 			//======================================================	
@@ -266,8 +269,19 @@
 	                        	 						   'bookingTime' :  timeStamp()   //下訂時間
 	                        	 				},
 	                    
-	                        	 				"success" : function(){
-	                        	 					alert('hello');
+	                        	 				"success" : function(){/* Servlet回應成功 */
+	                        	 					//alert('hello');
+	                        	 					$.notiny({/* notiny 特效*/
+	                        	 	                    theme:'dark',
+	                        	 	                    text: '訂單成立！',
+	                        	 	                    image: 'http://cdn.imgs.tuts.dragoart.com/how-to-draw-the-nba-logo_1_000000001129_3.jpg',
+	                        	 	                    delay: 1200,
+	                        	 	                    animation_show: 'notiny-animation-show 0.5s forwards',
+	                        	 	                    animation_hide: 'notiny-animation-hide 0.5s forwards' 
+	                        	 					});
+	                        	 				},
+	                        	 				"error" : function(){/* Servlet回應錯誤 */
+	                        	 					alert('下訂失敗');
 	                        	 				}
 	                        	 			})
 	                        	 				
