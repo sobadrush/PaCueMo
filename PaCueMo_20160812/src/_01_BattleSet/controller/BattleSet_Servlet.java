@@ -25,6 +25,8 @@ public class BattleSet_Servlet extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 //		request.setCharacterEncoding("UTF-8");
+
+//		request.setCharacterEncoding("UTF-8");
 //		response.setHeader("content-type", "text/html;charset=UTF-8");
 //		PrintWriter out = response.getWriter();
 //		out.write("國國國國國國國國");

@@ -12,6 +12,11 @@
 	
 	
 	<h1>Hello</h1>
+	
+	<input type="text" id="f1"> 
+	<br>
+	<input type="text" id="f2"> 
+	
 </body>
 
 
@@ -20,6 +25,11 @@
 <script>
 	$(function()
 	{
+			$('#f1').keyup(function(){
+				$('#f2').val($(this).val()/10)
+			})
+		
+		
 		   var cs1 = { 'color':'red' }
 		   $('h1').css(cs1)
 		

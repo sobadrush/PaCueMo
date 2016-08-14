@@ -197,9 +197,13 @@
 						  <label class="control-label" for="cvc" style="font-family:'微軟正黑體';font-weight:bolder;">代 碼</label>
 						  <input placeholder="CVC" type="text" name="cvc" class="form-control">
 					  </div>
-					 <div class="form-group">
-						  <label class="control-label" for="coin" style="font-family:'微軟正黑體';font-weight:bolder;">購買金額(1 NT: 100 P)</label>
-						  <input placeholder="購買代幣金額(not NT)" type="text" name="coin" class="form-control">
+					 <div class="form-group col-xs-6">
+						  <label class="control-label" for="NTD" style="font-family:'微軟正黑體';font-weight:bolder;">購買金額 (1 NT$ : 100 P)</label>
+						  <input placeholder="購買金額(NT)" type="text" name="NTD" class="form-control">
+					  </div>
+					   <div class="form-group col-xs-6">
+						  <label class="control-label" for="coin" style="font-family:'微軟正黑體';font-weight:bolder;">代幣數量</label>
+						  <input placeholder="代幣數量" type="text" name="coin" class="form-control" readonly="readonly">
 					  </div>
 	                  <!-- Allow form submission with keyboard without duplicating the dialog button -->
 	                  <!-- <input type="submit" tabindex="-1" style="position:absolute; top:-1000px"> -->
@@ -208,18 +212,22 @@
 	    </div>
 <!-- ================================================================================= -->
 
-
+	<script src="js/js_Util.js"></script>
 	<script type="text/javascript">
 
 		$(function()//ready事件
 		{	     
 
-			
-			$('#ff1').next().on("click", function () { /* 購買代幣 <li> */
+			$('#ff1').next().on("click", function () { /* 購買代幣 <li> , 點擊開啟信用卡dialog */
            	 myDialog.dialog("open");
         	});
 			//===================【 購買點數 - 信用卡 】======================		
 			
+			/* keyin 台幣 => 轉代幣  */
+			$("input[placeholder='購買金額(NT)']").keyup(function(){ 
+					$("input[placeholder='代幣數量']").val($(this).val() * 100 /* 代幣比值 */);
+			})
+				
 			 var myDialog, form;
 
             myDialog = $("#dialog-form").dialog({
@@ -234,13 +242,37 @@
 	                        	 	 click : function (){
 	                        	 			
 	                        	 		   //alert($(this).prop('tagName') +" 確認" );
-	                        	 			console.log($("input[placeholder='Card number']").val());
-	                        	 			console.log($("input[placeholder='Full name']").val());
-	                        	 			console.log($("input[placeholder='MM/YY']").val());
-	                        	 			console.log($("input[placeholder='CVC']").val());
-	                        	 			console.log($("input[placeholder='購買代幣金額(not NT)']").val());
-	                        	 			
-	                        	 			
+	                        	 		    var cardNum  = $("input[placeholder='Card number']").val();
+	                        	 		    var fullName = $("input[placeholder='Full name']").val();
+	                        	 		    var expire   = $("input[placeholder='MM/YY']").val();
+	                        	 		    var cvc      = $("input[placeholder='CVC']").val();
+	                        	 		    var ntd      = $("input[placeholder='購買金額(NT)']").val();
+	                        	 		    var coin     = $("input[placeholder='代幣數量']").val();
+
+	                        	 			//======================================================
+	                        	 			//==============【傳送信用卡資訊到servlet】=============
+	                        	 			//======================================================	
+	                        	 			$.ajax({
+	                        	 				"type" : "post",
+	                        	 				"url"  : "<%=request.getContextPath()%>/_01_Gambling/GoodsOrder_Servlet.do",
+	                        	 				"data" : { 
+	                        	 							'action'    :   'buyCoins'   , 
+	                        	 						   'cardNum'    :   cardNum    ,
+	                        	 						   'fullName'   :   fullName   ,
+	                        	 						   'expire'     :   expire     ,
+	                        	 						   'cvc'        :   cvc        ,
+	                        	 						   'NTD'        :   ntd        ,
+	                        	 						   'coin'        :  coin        ,
+	                        	 						   'bookingTime' :  timeStamp()   //下訂時間
+	                        	 				},
+	                    
+	                        	 				"success" : function(){
+	                        	 					alert('hello');
+	                        	 				}
+	                        	 			})
+	                        	 				
+	                        	 		
+	                        	 			//======================================================
 	                                    myDialog.dialog("close");/*關閉 dialog*/
 									 }
 	                         }  ,
@@ -248,7 +280,7 @@
 	                        	 	 text  : "取消",
 	                        	 	'class' : "btn btn-primary",
 	                        	 	 click : function (){
-	                        	 			alert($(this).prop('tagName')+"cancel");
+	                        	 			 //alert($(this).prop('tagName')+"cancel");
 	                                     myDialog.dialog("close");/*關閉 dialog*/
 									 }
                          		}
