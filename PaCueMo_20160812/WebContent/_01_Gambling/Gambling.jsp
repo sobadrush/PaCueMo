@@ -184,7 +184,7 @@
 	                
 	                  <div class="form-group">
 						  <label class="control-label" for="number" style="font-family:'微軟正黑體';font-weight:bolder;">卡 號</label>
-						  <input placeholder="Card number" type="text" name="number" class="form-control" value="4023 7845 6941 3354">
+						  <input placeholder="Card number" type="text" name="number" class="form-control" value="4023 7845 6941 3354" maxlength="19">
 					  </div>
 	                  <div class="form-group">
 						  <label class="control-label" for="name" style="font-family:'微軟正黑體';font-weight:bolder;">姓 名</label>
@@ -192,11 +192,11 @@
 					  </div>
 	                  <div class="form-group">
 						  <label class="control-label" for="expiry" style="font-family:'微軟正黑體';font-weight:bolder;">期 限</label>
-						  <input placeholder="MM/YY" type="text" name="expiry" class="form-control" value="07/2018">
+						  <input placeholder="MM/YYYY" type="text" name="expiry" class="form-control" value="07/2018">
 					  </div>
 					  <div class="form-group">
-						  <label class="control-label" for="cvc" style="font-family:'微軟正黑體';font-weight:bolder;">代 碼</label>
-						  <input placeholder="CVC" type="text" name="cvc" class="form-control" value="346">
+						  <label class="control-label" for="cvc" style="font-family:'微軟正黑體';font-weight:bolder;" >代 碼</label>
+						  <input placeholder="CVC" type="text" name="cvc" class="form-control" value="346" pattern=".{3,}">
 					  </div>
 					 <div class="form-group col-xs-6">
 						  <label class="control-label" for="NTD" style="font-family:'微軟正黑體';font-weight:bolder;">購買金額 (1 NT$ : 100 P)</label>
@@ -230,6 +230,8 @@
 					$("input[placeholder='代幣數量']").val($(this).val() * 100 /* 代幣比值 */);
 			})
 				
+		
+			
 			 var myDialog, form;
 
             myDialog = $("#dialog-form").dialog({
@@ -240,15 +242,14 @@
                 width: 500,
                 modal: true,
                 buttons:[
-	                         {
-	                        	 	 text  : "確認購買",
+	                          {
+	                            	text  : "確認購買",
 	                        	 	'class' : "btn btn-primary",
 	                        	 	 click : function (){
-	                        	 			
 	                        	 		   //alert($(this).prop('tagName') +" 確認" );
 	                        	 		    var cardNum  = $("input[placeholder='Card number']").val();
 	                        	 		    var fullName = $("input[placeholder='Full name']").val();
-	                        	 		    var expire   = $("input[placeholder='MM/YY']").val();
+	                        	 		    var expire   = $("input[placeholder='MM/YYYY']").val();
 	                        	 		    var cvc      = $("input[placeholder='CVC']").val();
 	                        	 		    var ntd      = $("input[placeholder='購買金額(NT)']").val();
 	                        	 		    var coin     = $("input[placeholder='代幣數量']").val();

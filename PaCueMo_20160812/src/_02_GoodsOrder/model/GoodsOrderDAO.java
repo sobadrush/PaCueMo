@@ -80,6 +80,7 @@ public class GoodsOrderDAO implements GoodsOrderDAO_interface
 		}
 		catch (SQLException se)
 		{
+			//se.printStackTrace();
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		}
 
